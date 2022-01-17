@@ -1,10 +1,14 @@
 @echo  off
 echo=
 
-echo set sytem env
-
-go build -buildmode=c-shared -o .\bin\dll\libadd.dll .\src\server\main.go
+go build -buildmode=c-shared -o .\bin\windows\libadd.dll .\src\server\main.go
 echo "Build libadd.dll success"
+
+SET CGO_ENABLED=0
+SET GOOS=linux
+SET GOARCH=amd64
+go build -buildmode=c-shared -o .\bin\linux\libadd.dll .\src\server\main.go
+echo "Build linux libadd.so success"
 
 :set ANDROID_NDK_HOME=$ANDROID_HOME/ndk/21.0.6113669
 set GOARCH=arm
