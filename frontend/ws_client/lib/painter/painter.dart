@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 // 绘制棋盘
-class GomokuPainter extends CustomPainter {
+class FiveBoardPainter extends CustomPainter {
   final List<List<int>> checkerboard;
   final Size screenSize;
   final double titlePadding;
 
-  GomokuPainter(this.checkerboard, this.screenSize, this.titlePadding);
+  FiveBoardPainter(this.checkerboard, this.screenSize, this.titlePadding);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -41,14 +41,9 @@ class GomokuPainter extends CustomPainter {
             pos_Y + pos_Y * 2 * (rows ~/ 2)),
         4,
         paint);
-
-    // Paint paintRect = Paint();
-    // paintRect.color = Colors.lightBlue;
-    // Rect rect = Rect.fromPoints(Offset(150.0, 300.0), Offset(300.0, 400.0));
-    // canvas.drawRect(rect, paintRect);
   }
 
-  bool shouldRepaint(GomokuPainter oldDelegate) => false;
+  bool shouldRepaint(FiveBoardPainter oldDelegate) => false;
 
-  bool shouldRebuildSemantics(GomokuPainter oldDelegate) => false;
+  bool shouldRebuildSemantics(FiveBoardPainter oldDelegate) => false;
 }

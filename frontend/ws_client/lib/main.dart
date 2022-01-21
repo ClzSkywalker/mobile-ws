@@ -1,12 +1,16 @@
 import 'dart:ffi' as ffi;
+import 'dart:ffi';
+import 'dart:io';
 import 'package:call/call.dart';
 import 'package:path/path.dart' as path;
 
 import 'package:flutter/material.dart';
 
+import 'component/gamePage.dart';
 
-typedef FuncNative = ffi.Int32 Function(ffi.Int32, ffi.Int32);
-typedef FuncDart = int Function(int, int);
+
+typedef FuncNative = ffi.Int32 Function(ffi.Int32);
+typedef FuncDart = int Function(int);
 void main() {
   runApp(const MyApp());
 }
@@ -34,18 +38,22 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+final DynamicLibrary dll = Platform.isWindows
+    ? DynamicLibrary.open("E:\\Flutter\\project\\mobile-ws\\frontend\\ws_client\\assets\\windows\\libadd.dll")
+    : DynamicLibrary.open("rPPG.framework/rPPG");
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
-  Widget build(BuildContext context) {
-    var dll = getDyLibModule(path.join('assets','dll','libadd.dll'));     // use it as images.
-    var add = dll.lookupFunction<FuncNative, FuncDart>('add');
+  Widget build(BuildContext context) {// use it as images.
+    //var add = dll.lookupFunction<FuncNative, FuncDart>('addBinary');
+    var add = dll.lookupFunction<FuncNative, FuncDart>('ClimbStairs');
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
       body: Center(
-        child: Text(add(1,2).toString()),
+        child: BorderPage(),//Text(add(5).toString(),style: TextStyle(fontSize: 100),),//
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
